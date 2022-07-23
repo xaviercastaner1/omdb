@@ -1,0 +1,21 @@
+<div class="dialog">
+    <h2 mat-dialog-title>{{movie.Title}}</h2>
+    <mat-dialog-content class="mat-typography">
+        
+        <div class="d-flex gap-5">
+            <img [src]="movie.Poster">
+
+            <div class="info">
+                <h3>Released: {{movie.Released}}</h3>
+                <h3>Runtime: {{movie.Runtime}}</h3>
+                <h3>Actors: {{movie.Actors}}</h3>
+                <h3>Director: {{movie.Director}}</h3>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close color="primary">Close</button>
+    </mat-dialog-actions>
+</div>
+

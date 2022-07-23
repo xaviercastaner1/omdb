@@ -1,0 +1,74 @@
+<div class="dialog">
+    <h2 mat-dialog-title>Add Movie</h2>
+    <mat-dialog-content class="mat-typography">
+        
+        <div>
+            <form #movieForm="ngForm">
+
+                <div class="row">
+                
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Title</mat-label>
+                            <input matInput type="text" required [(ngModel)]="movie.Title"
+                            name="title">
+                        </mat-form-field>
+                        
+                        <mat-form-field>
+                            <mat-label>Director</mat-label>
+                            <input matInput type="text" required [(ngModel)]="movie.Director"
+                            name="director">
+                        </mat-form-field>
+                        
+                        
+                    </div>
+
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Release</mat-label>
+                            <input matInput type="date" [(ngModel)]="movie.Released"
+                            name="release">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Box Office</mat-label>
+                            <input matInput type="number" [(ngModel)]="movie.BoxOffice"
+                            name="box-office">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="example-chip-list" appearance="fill" style="width: 90%;">
+                                <mat-label>Actors</mat-label>
+                                <mat-chip-list #chipList aria-label="Actor selection">
+                                    <mat-chip *ngFor="let actor of actors" (removed)="remove(actor)">
+                                        {{actor}}
+                                        <button matChipRemove>
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip>
+                                    <input placeholder="New actor..." #actorInput
+                                        [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="add($event)" matInput required>
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    <mat-option *ngFor="let actor of filteredActors | async" [value]="actor">
+                                        {{actor}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                
+                </div>
+
+            </form>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="true" color="primary" (click)="closeDialog()">Save</button>
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</div>
+

@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between">
+    <form class="movies-form">
+        <mat-form-field class="movies-full-width" appearance="fill">
+            <mat-label>Movie</mat-label>
+            <input type="text" placeholder="Pick one" 
+            aria-label="Movie" matInput #movieTitle name="movieTitle"
+            [matAutocomplete]="auto" 
+            (input)="searchByTitle(movieTitle.value)">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                
+            </mat-autocomplete>
+        </mat-form-field>
+
+    </form>
+
+    <div class="actions me-5">
+        <button mat-button color="accent"
+        (click)="openAddDialog()">Add Movie</button>
+    </div>
+</div>
+
+
+
+<div class="d-flex flex-wrap gap-5">
+    <div *ngFor="let movie of filteredMovies">
+        <div>
+            <app-movie [movie]="movie" (movieEmitter)="openDialog($event)"></app-movie>
+        </div>
+        
+    </div>
+    
+</div>
+
+<ng-container *ngIf="error">
+    <h1>Too many results...</h1>
+</ng-container>
